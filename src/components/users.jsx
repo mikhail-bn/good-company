@@ -7,11 +7,14 @@ import 'bootstrap/dist/css/bootstrap.css'
 export default function Users() {
     // useState для массива users
     const [users, setUsers] = useState(api.users.fetchAll())
-    
+    const [counter, setCounter] = useState(1)    
     // Функция изменения массива при нажатии на кнопку
     function handleDelete(userId) {
         setUsers(users.filter((user) => user._id !== userId))
     }
+    // function handleCounter() {
+    //     setCounter(prevState => prevState +1)
+    // }
 
     return (       
         <>
@@ -25,7 +28,7 @@ export default function Users() {
             {users.length > 0 &&
             <table className="table">
                 <thead>
-                    <tr>                        
+                    <tr>                
                         <th scope="col">Name</th>
                         <th scope="col">Personal qualities</th>
                         <th scope="col">Profession</th>
@@ -36,9 +39,9 @@ export default function Users() {
                 </thead>
                 <tbody>
                     {
-                        users.map((user) => {
-                            return (
-                                <tr key={user._id}>                               
+                        users.map((user) => {                            
+                            return (                               
+                                <tr key={user._id}>                                 
                                     <td>{user.name}</td>
                                     <td>{user.qualities.map(quality => <span className={"badge m-1 bg-" + quality.color} key={quality._id}>{quality.name + " "}</span>)}</td>
                                     <td>{user.profession.name}</td>
